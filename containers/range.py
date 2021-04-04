@@ -47,6 +47,12 @@ def range(a, b=None, c=None):
     if c:
         increment = c
 
-    while start_val < end_val:
-        yield start_val
-        start_val += increment
+    if end_val > start_val and increment > 0:
+        while start_val < end_val:
+            yield start_val
+            start_val += increment
+
+    elif end_val < start_val and increment < 0:
+        while start_val > end_val:
+            yield start_val
+            start_val += increment
