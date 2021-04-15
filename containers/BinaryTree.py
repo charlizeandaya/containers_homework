@@ -238,15 +238,3 @@ class BinaryTree():
             left_counter = BinaryTree._height(node.left)
             right_counter = BinaryTree._height(node.right)
             return 1 + max(left_counter, right_counter)
-
-
-if __name__ == "__main__":
-    node_left = Node(3)
-    node_right = Node(8)
-    root_node = Node(5, node_left, node_right)
-    print(root_node)
-
-    bt = BinaryTree(5)
-    print(bt.to_list(traversal_type='preorder'))
-
-    print(bt.height())
