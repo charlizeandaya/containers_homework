@@ -1,5 +1,5 @@
-from containers.BinaryTree import BinaryTree, Node
-from containers.BST import BST
+from BinaryTree import BinaryTree, Node
+from BST import BST
 
 
 def test__BST_super():

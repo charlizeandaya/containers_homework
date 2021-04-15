@@ -1,14 +1,17 @@
 '''
 This file implements the Node and BinaryTree classes.
-These two classes are the building blocks for the BST, AVLTree, and Heap data structures.
-It is crucial to get these implemented correctly in order to be able to implement the other data structures.
+These two classes are the building blocks for the BST, AVLTree,
+and Heap data structures.
+It is crucial to get these implemented correctly in order to be able to
+implement the other data structures.
 '''
 
 
 class Node():
     '''
     You do not have to implement anything within this class.
-    Given a node t, you can visualize the node by running str(t) in the python interpreter.
+    Given a node t, you can visualize the node by running str(t) in
+    the python interpreter.
     This is a key method to perform debugging,
     so you should get familiar with how to visualize these strings.
     '''
@@ -45,7 +48,8 @@ class BinaryTree():
     def __init__(self, root=None):
         '''
         Construct a BinaryTree, possibly with a single element in it.
-        Note that for an ordinary BinaryTree, we cannot insert more than one element in the constructor,
+        Note that for an ordinary BinaryTree, we cannot insert more
+        than one element in the constructor,
         but for the BST (and other tree types) we can.
         '''
         if root:
@@ -61,8 +65,10 @@ class BinaryTree():
 
     def print_tree(self, traversal_type):
         '''
-        There are three primary types of tree traversals: preorder, inorder, and postorder.
-        All three of these traversals are implemented for you as a reference on how to write recursive functions on recursive data structures.
+        There are three primary types of tree traversals: preorder, inorder,
+        and postorder.
+        All three of these traversals are implemented for you as a reference
+        on how to write recursive functions on recursive data structures.
         '''
         if traversal_type == 'preorder':
             return self.preorder_print(self.root, '')
@@ -71,7 +77,8 @@ class BinaryTree():
         elif traversal_type == 'postorder':
             return self.postorder_print(self.root, '')
         else:
-            raise ValueError('Traversal type ' + str(traversal_type) + ' is not supported.')
+            raise ValueError('Traversal type ' +
+                             str(traversal_type) + ' is not supported.')
 
     def preorder_print(self, start, traversal):
         '''
@@ -109,35 +116,65 @@ class BinaryTree():
         but instead of printing the tree,
         it returns the contents of the tree as a list.
 
-        A general programming principle is that a function should return its results
+        A general programming principle is that a function should return
+        its results
         rather than print them whenever possible.
         If a function returns its results,
-        we can always print the returned results if we need to visualize them.
-        But by returning the results we can also do more computations on the results if needed.
-        Many of the test cases for more complicated tree functions rely on this to_list function,
+        we can always print the returned results if we need to visualize
+        them.
+        But by returning the results we can also do more computations
+        on the results if needed.
+        Many of the test cases for more complicated tree functions rely
+        on this to_list function,
         so it is import to implement it correctly.
 
         FIXME:
         Implement this function by modifying the _print functions above.
         '''
+        num_list = []
+        if traversal_type == 'preorder':
+            return self.preorder(self.root, num_list)
+        elif traversal_type == 'inorder':
+            return self.inorder(self.root, num_list)
+        elif traversal_type == 'postorder':
+            return self.postorder(self.root, num_list)
+        else:
+            raise ValueError('Traversal type ' +
+                             str(traversal_type) + ' is not supported.')
 
-    def preorder(self, start, traversal):
+    def preorder(self, start, traversal=[]):
+        '''
+        FIXME:
+        Implement this function by modifying the _print functions above.
+        '''
+        if start:
+            traversal.append(start.value)
+            traversal = self.preorder(start.left, traversal)
+            traversal = self.preorder(start.right, traversal)
+        return traversal
+
+    def inorder(self, start, traversal=[]):
+        '''
+        FIXME:
+        Implement this function by modifying the _print functions above.
+        '''
+        if start:
+            traversal = self.inorder(start.left, traversal)
+            traversal.append(start.value)
+            traversal = self.inorder_print(start.right, traversal)
+        return traversal
+
+    def postorder(self, start, traversal=[]):
         '''
         FIXME:
         Implement this function by modifying the _print functions above.
         '''
 
-    def inorder(self, start, traversal):
-        '''
-        FIXME:
-        Implement this function by modifying the _print functions above.
-        '''
-
-    def postorder(self, start, traversal):
-        '''
-        FIXME:
-        Implement this function by modifying the _print functions above.
-        '''
+        if start:
+            traversal = self.postorder(start.left, traversal)
+            traversal = self.postorder_print(start.right, traversal)
+            traversal.append(start.value)
+        return traversal
 
     def __len__(self):
         '''
@@ -147,7 +184,7 @@ class BinaryTree():
         return BinaryTree.__len__helper(self.root)
 
     @staticmethod
-    def __len__helper(node):
+    def __len__helper(node, counter=0):
         '''
         FIXME:
         Implement this function.
@@ -155,15 +192,24 @@ class BinaryTree():
         HINT:
         The pseudocode is:
         add 1 for the current node;
-        if a left child exists, add the result of __len__helper on the left child;
-        if a right child exists, add the result of __len__helper on the right child;
+        if a left child exists, add the result of __len__helper on the left
+        child;
+        if a right child exists, add the result of __len__helper on the right
+        child;
         return the sum of these three steps
         '''
+        counter += 1
+        if node.left:
+            counter = BinaryTree.__len__helper(node.left, counter)
+        if node.right:
+            counter = BinaryTree.__len__helper(node.right, counter)
+        return counter
 
     def height(self):
         '''
         Returns the height of the tree.
-        Recall that the height is the maximum length from the root to a leaf node.
+        Recall that the height is the maximum length from the root to
+        a leaf node.
 
         FIXME:
         Implement this function.
@@ -171,9 +217,10 @@ class BinaryTree():
         HINT:
         See how the __len__ method calls its helper staticmethod.
         '''
+        return BinaryTree._height(self.root)
 
     @staticmethod
-    def _height(node):
+    def _height(node, counter=0):
         '''
         FIXME:
         Implement this function.
@@ -182,5 +229,24 @@ class BinaryTree():
         The pseudocode is:
         if a left child exists, calculate the _height of the left child;
         if a right child exists, calculate the _height of the right child;
-        return 1 (for the current node) plus the max of the left and right _heights calculated above
+        return 1 (for the current node) plus the max of the left and
+        right _heights calculated above
         '''
+        if node is None:
+            return 0
+        else:
+            left_counter = BinaryTree._height(node.left)
+            right_counter = BinaryTree._height(node.right)
+            return 1 + max(left_counter, right_counter)
+
+
+if __name__ == "__main__":
+    node_left = Node(3)
+    node_right = Node(8)
+    root_node = Node(5, node_left, node_right)
+    print(root_node)
+
+    bt = BinaryTree(5)
+    print(bt.to_list(traversal_type='preorder'))
+
+    print(bt.height())
