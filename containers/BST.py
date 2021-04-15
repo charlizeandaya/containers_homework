@@ -257,22 +257,3 @@ class BST(BinaryTree):
         '''
         for x in xs:
             self.remove(x)
-
-
-if __name__ == "__main__":
-    test = [3, 1, 4, 10, 2, 13, 19, 19]
-    binary_list = BST(test)
-    print(binary_list.root)
-    print(binary_list.to_list(traversal_type='preorder'))
-    # the_list = binary_list.to_list(traversal_type='preorder')
-    # print(the_list)
-    new_list = [20, 32, 2]
-    binary_list.insert_list(new_list)
-    print(binary_list.root)
-    print(binary_list.to_list(traversal_type='preorder'))
-    print(binary_list.find(19))
-    print(binary_list.find(198))
-    print(100 in binary_list)
-    print(binary_list.find_largest())
-    binary_list.remove(20)
-    print(binary_list.to_list(traversal_type='preorder'))
