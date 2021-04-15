@@ -4,7 +4,7 @@ The functions in this file are considerably harder than the functions
 in the BinaryTree file.
 '''
 
-from containers.BinaryTree import BinaryTree, Node
+from BinaryTree import BinaryTree, Node
 # from BinaryTree import BinaryTree, Node
 
 
@@ -97,7 +97,10 @@ class BST(BinaryTree):
         Create a staticmethod helper function following the pattern of
         _is_bst_satisfied.
         '''
-        return BST._insert(self.root, value)
+        if self.root is None:
+            self.root = BST._insert(self.root, value)
+        else:
+            return BST._insert(self.root, value)
 
     @staticmethod
     def _insert(root: Node, number: int):
