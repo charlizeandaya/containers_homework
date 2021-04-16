@@ -196,6 +196,8 @@ class BinaryTree():
         child;
         return the sum of these three steps
         '''
+        if node is None:
+            return 0
         counter += 1
         if node.left:
             counter = BinaryTree.__len__helper(node.left, counter)
@@ -231,7 +233,7 @@ class BinaryTree():
         right _heights calculated above
         '''
         if node is None:
-            return 0
+            return -1
         else:
             left_counter = BinaryTree._height(node.left)
             right_counter = BinaryTree._height(node.right)
