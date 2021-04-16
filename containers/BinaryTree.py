@@ -159,7 +159,7 @@ class BinaryTree():
         if start:
             traversal = self.inorder(start.left, traversal)
             traversal.append(start.value)
-            traversal = self.inorder_print(start.right, traversal)
+            traversal = self.inorder(start.right, traversal)
         return traversal
 
     def postorder(self, start, traversal=[]):
@@ -170,7 +170,7 @@ class BinaryTree():
 
         if start:
             traversal = self.postorder(start.left, traversal)
-            traversal = self.postorder_print(start.right, traversal)
+            traversal = self.postorder(start.right, traversal)
             traversal.append(start.value)
         return traversal
 
