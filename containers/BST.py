@@ -23,10 +23,11 @@ class BST(BinaryTree):
         then each element of xs needs to be inserted into the BST.
         '''
         super().__init__()
-        if xs:
-            for x in xs:
-                self.root = self.insert(x)
-
+        if xs is None:
+            xs = []
+        for x in xs:
+            self.insert(x)
+            
     def __repr__(self):
         '''
         Notice that in the BinaryTree class,
@@ -97,10 +98,7 @@ class BST(BinaryTree):
         Create a staticmethod helper function following the pattern of
         _is_bst_satisfied.
         '''
-        if self.root is None:
-            self.root = BST._insert(self.root, value)
-        else:
-            return BST._insert(self.root, value)
+        self.root = BST._insert(self.root, value)
 
     @staticmethod
     def _insert(root: Node, number: int):
