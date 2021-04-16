@@ -27,7 +27,7 @@ class BST(BinaryTree):
             xs = []
         for x in xs:
             self.insert(x)
-            
+
     def __repr__(self):
         '''
         Notice that in the BinaryTree class,
