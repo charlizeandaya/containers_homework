@@ -237,4 +237,4 @@ class BinaryTree():
         else:
             left_counter = BinaryTree._height(node.left)
             right_counter = BinaryTree._height(node.right)
-            return 1 + max(left_counter, right_counter)
+        return 1 + max(left_counter, right_counter)
