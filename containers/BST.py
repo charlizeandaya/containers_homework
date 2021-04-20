@@ -4,7 +4,7 @@ The functions in this file are considerably harder than the functions
 in the BinaryTree file.
 '''
 
-from BinaryTree import BinaryTree, Node
+from containers.BinaryTree import BinaryTree, Node
 # from BinaryTree import BinaryTree, Node
 
 
@@ -67,7 +67,6 @@ class BST(BinaryTree):
             return True
         else:
             return False
-
 
     def is_bst_satisfied(self):
         '''
@@ -282,9 +281,3 @@ class BST(BinaryTree):
         '''
         for x in xs:
             self.remove(x)
-
-if __name__ == "__main__":
-    test = [1, 2, 3]
-    bst_test = BST(test)
-    print(bst_test.root)
-    print(bst_test.to_list(traversal_type='preorder'))
