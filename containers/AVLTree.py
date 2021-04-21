@@ -85,7 +85,6 @@ class AVLTree(BST):
         new_root_left.right = node.right.left
 
         new_root.left = new_root_left
-        
         return new_root
 
     @staticmethod
@@ -110,7 +109,6 @@ class AVLTree(BST):
         new_root_right.left = node.left.right
 
         new_root.right = new_root_right
-        
         return new_root
 
     def insert(self, value):
