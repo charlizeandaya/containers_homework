@@ -4,7 +4,7 @@ The functions in this file are considerably harder than the functions
 in the BinaryTree file.
 '''
 
-from containers.BinaryTree import BinaryTree, Node
+from BinaryTree import BinaryTree, Node
 
 
 class BST(BinaryTree):

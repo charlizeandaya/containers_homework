@@ -5,8 +5,8 @@ the BinaryTree and BST files,
 but there are fewer of them.
 '''
 
-from containers.BinaryTree import BinaryTree, Node
-from containers.BST import BST
+from BinaryTree import BinaryTree, Node
+from BST import BST
 
 
 class AVLTree(BST):
@@ -75,12 +75,17 @@ class AVLTree(BST):
         fairly different from our class hierarchy,
         however, so you will have to adapt their code.
         '''
-        old_root = node
-        new_root = node.right
-        temp_root = old_root.right.left
-        new_root.right = old_root.right.right
-        old_root.right = temp_root
-        new_root.left = old_root
+        if node is None or node.right is None:
+            return node
+        new_root = Node(node.right.value)
+        new_root.right = node.right.right
+
+        new_root_left = Node(node.value)
+        new_root_left.left = node.left
+        new_root_left.right = node.right.left
+
+        new_root.left = new_root_left
+        
         return new_root
 
     @staticmethod
@@ -95,12 +100,17 @@ class AVLTree(BST):
         different from our class hierarchy,
         however, so you will have to adapt their code.
         '''
-        old_root = node
-        new_root = node.left
-        temp_root = old_root.left.right
-        new_root.left = old_root.left.left
-        old_root.left = temp_root
-        new_root.right = old_root
+        if node is None or node.left is None:
+            return node
+        new_root = Node(node.left.value)
+        new_root.left = node.left.left
+
+        new_root_right = Node(node.value)
+        new_root_right.right = node.right
+        new_root_right.left = node.left.right
+
+        new_root.right = new_root_right
+        
         return new_root
 
     def insert(self, value):
