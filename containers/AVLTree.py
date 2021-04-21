@@ -157,8 +157,8 @@ class AVLTree(BST):
                     node = AVLTree._rebalance(node)
                 else:
                     pass
-            if not AVLTree._is_avl_satisfied(node):
-                node = AVLTree._rebalance(node)
+            # if not AVLTree._is_avl_satisfied(node):
+                # node = AVLTree._rebalance(node)
             return node
 
     @staticmethod
