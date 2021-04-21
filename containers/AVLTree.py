@@ -131,6 +131,8 @@ class AVLTree(BST):
         '''
         if self.root:
             self.root = AVLTree._insert(self.root, value)
+            if not self.is_avl_satisfied():
+                self.root = AVLTree._rebalance(self.root)
         else:
             self.root = Node(value)
 
@@ -157,8 +159,6 @@ class AVLTree(BST):
                     node = AVLTree._rebalance(node)
                 else:
                     pass
-            # if not AVLTree._is_avl_satisfied(node):
-                # node = AVLTree._rebalance(node)
             return node
 
     @staticmethod
