@@ -5,8 +5,8 @@ the BinaryTree and BST files,
 but there are fewer of them.
 '''
 
-from containers.BinaryTree import BinaryTree, Node
-from containers.BST import BST
+from BinaryTree import BinaryTree, Node
+from BST import BST
 
 
 class AVLTree(BST):
@@ -75,12 +75,12 @@ class AVLTree(BST):
         fairly different from our class hierarchy,
         however, so you will have to adapt their code.
         '''
+        old_root = node
         new_root = node.right
-        if new_root.left is not None:
-            node.right = new_root.left
-        else:
-            node.right = None
-        new_root.left = node
+        temp_root = old_root.right.left
+        new_root.right = old_root.right.right
+        old_root.right = temp_root
+        new_root.left = old_root
         return new_root
 
     @staticmethod
@@ -95,12 +95,12 @@ class AVLTree(BST):
         different from our class hierarchy,
         however, so you will have to adapt their code.
         '''
+        old_root = node
         new_root = node.left
-        if new_root.right is not None:
-            node.left = new_root.right
-        else:
-            node.left = None
-        new_root.right = node
+        temp_root = old_root.left.right
+        new_root.left = old_root.left.left
+        old_root.left = temp_root
+        new_root.right = old_root
         return new_root
 
     def insert(self, value):
@@ -168,10 +168,3 @@ class AVLTree(BST):
             else:
                 node = AVLTree._right_rotate(node)
         return node
-
-
-if __name__ == "__main__":
-    test = [7, 3, 1, 16, 2, 4]
-    avl_tree_test = AVLTree(test)
-    print(avl_tree_test)
-    print(avl_tree_test.to_list(traversal_type='preorder'))
