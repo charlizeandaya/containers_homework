@@ -12,7 +12,7 @@ This homework is using an explicit tree implementation to help you
 get more practice with OOP-style programming and classes.
 '''
 
-from containers.BinaryTree import BinaryTree, Node
+from BinaryTree import BinaryTree, Node
 
 
 class Heap(BinaryTree):
@@ -201,12 +201,22 @@ class Heap(BinaryTree):
     def _remove_bottom_right(node, remlist):
         if remlist:
             if remlist[0] == '0':
-                node.left, val = Heap._remove_bottom_right(
-                    node.left, remlist[1:])
-            elif remlist[0] == '1':
-                node.right, val = Heap._remove_bottom_right(
-                    node.right, remlist[1:])
+                if len(remlist) > 1:
+                    return Heap._remove_bottom_right(
+                        node.left, remlist[1:])
+                else:
+                    temp = node.left.value
+                    node = None
+                    return temp
 
+            elif remlist[0] == '1':
+                if len(remlist) > 1:
+                    return Heap._remove_bottom_right(
+                        node.right, remlist[1:])
+                else:
+                    temp = node.right.value
+                    node = None
+                    return temp
         else:
             temp = node.value
             node = None
