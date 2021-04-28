@@ -111,8 +111,8 @@ class Heap(BinaryTree):
         functions.
         '''
         if self.root:
-            nodes_list = self.__len__()
-            numlist = "{0:b}".format(nodes_list + 1)[1:]
+            nodes = self.__len__()
+            numlist = "{0:b}".format(nodes + 1)[1:]
             self.root = Heap._insert(self.root, value, numlist)
         else:
             self.root = Node(value)
@@ -187,35 +187,29 @@ class Heap(BinaryTree):
         but I personally found dividing up the code into two made the most
         sense.
         '''
-        if not self.root:
-            return
+        if self.root:
+            nodes = self.__len__()
+            if nodes == 1:
+                self.root = None
         else:
-            nodes_list = self.__len__()
-            numlist = "{0:b}".format(nodes_list)[1:]
-            val, self.root = Heap._remove_bottom_right(self.root, numlist)
-            if self.root:
-                self.root.value = val
-            print(str(self.root))
+            bottom = "{0:b}".format(nodes)[1:]
+            self.root, self.root.value = Heap._remove_bottom_right(
+                self.root, bottom)
             self.root = Heap._trickle(self.root)
 
     @staticmethod
-    def _remove_bottom_right(node, numlist):
-        if len(numlist) == 0:
-            return None, None
-        elif len(numlist) == 1:
-            if numlist[0] == '0':
-                temp = node.left.value
-                node.left = None
-                return temp
-            elif numlist[0] == '1':
-                temp = node.right.value
-                node.right = None
-                return temp
+    def _remove_bottom_right(node, remlist):
+        if remlist:
+            if remlist[0] == '0':
+                node.left, val = Heap._remove_bottom_right(
+                    node.left, remlist[1:])
+            elif remlist[0] == '1':
+                node.right, val = Heap._remove_bottom_right(
+                    node.right, remlist[1:])
         else:
-            if numlist[0] == '0':
-                return Heap._remove_bottom_right(node.left, numlist[1:])
-            elif numlist[0] == '1':
-                return Heap._remove_bottom_right(node.right, numlist[1:])
+            temp = node.value
+            node = None
+            return temp
 
     @staticmethod
     def _trickle(node):
