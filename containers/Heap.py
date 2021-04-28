@@ -72,7 +72,7 @@ class Heap(BinaryTree):
         Implement this method.
         '''
         ret = True
-        if node.left and node.right is None:
+        if node.left is None and node.right is None:
             ret &= False
         if node.left:
             ret &= (node.left.value >= node.value)
