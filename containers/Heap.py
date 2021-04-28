@@ -178,40 +178,46 @@ class Heap(BinaryTree):
         but I personally found dividing up the code into two made the most
         sense.
         '''
-        if self.root:
-            nodes = self.__len__()
-            if nodes == 1:
-                self.root = None
+        if not self.root:
+            pass
         else:
+            nodes = self.__len__()
             bottom = "{0:b}".format(nodes)[1:]
-            self.root, self.root.value = Heap._remove_bottom_right(
-                self.root, bottom)
+            val, self.root = Heap._remove_bottom_right(self.root, bottom)
+            if self.root:
+                self.root.value = val
             self.root = Heap._trickle(self.root)
 
     @staticmethod
     def _remove_bottom_right(node, remlist):
-        if remlist:
-            if remlist[0] == '0':
-                node.left, val = Heap._remove_bottom_right(
+        val = ''
+        if len(remlist) == 0:
+            return None, None
+        if remlist[0] == '0':
+            if len(remlist) == 1:
+                val = node.left.value
+                node.left = None
+            else:
+                val, node.left = Heap._remove_bottom_right(
                     node.left, remlist[1:])
-            elif remlist[0] == '1':
-                node.right, val = Heap._remove_bottom_right(
+        if remlist[0] == '1':
+            if len(remlist) == 1:
+                val = node.right.value
+                node.right = None
+            else:
+                val, node.right = Heap._remove_bottom_right(
                     node.right, remlist[1:])
-
-        else:
-            temp = node.value
-            node = None
-            return temp
+        return val, node
 
     @staticmethod
     def _trickle(node):
         if not Heap._is_heap_satisfied(node):
-            if node.left:
+            if node.left and not node.right:
                 temp = node.value
                 node.value = node.left.value
                 node.left.value = temp
                 node.left = Heap._trickle(node.left)
-            elif node.right:
+            elif not node.left and node.right:
                 temp = node.value
                 node.value = node.right.value
                 node.right.value = temp
@@ -228,7 +234,7 @@ class Heap(BinaryTree):
                     node.left.value = temp
                     node.left = Heap._trickle(node.left)
             else:
-                return node
+                pass
         else:
-            return node
+            pass
         return node
