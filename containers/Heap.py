@@ -12,7 +12,7 @@ This homework is using an explicit tree implementation to help you
 get more practice with OOP-style programming and classes.
 '''
 
-from containers.BinaryTree import BinaryTree, Node
+from BinaryTree import BinaryTree, Node
 
 
 class Heap(BinaryTree):
@@ -73,9 +73,9 @@ class Heap(BinaryTree):
         '''
         ret = True
         if node is None:
-            return False
+            return True
         if node.left is None and node.right is None:
-            ret &= False
+            return True
         if node.left:
             ret &= (node.left.value >= node.value)
             ret &= Heap._is_heap_satisfied(node.left)
