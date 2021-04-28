@@ -206,6 +206,7 @@ class Heap(BinaryTree):
             elif remlist[0] == '1':
                 node.right, val = Heap._remove_bottom_right(
                     node.right, remlist[1:])
+
         else:
             temp = node.value
             node = None
