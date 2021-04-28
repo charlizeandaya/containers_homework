@@ -191,11 +191,11 @@ class Heap(BinaryTree):
             nodes = self.__len__()
             if nodes == 1:
                 self.root = None
-        else:
-            bottom = "{0:b}".format(nodes)[1:]
-            self.root, self.root.value = Heap._remove_bottom_right(
-                self.root, bottom)
-            self.root = Heap._trickle(self.root)
+            else:
+                bottom = "{0:b}".format(nodes)[1:]
+                self.root.value = Heap._remove_bottom_right(
+                    self.root, bottom)
+                self.root = Heap._trickle(self.root)
 
     @staticmethod
     def _remove_bottom_right(node, remlist):
