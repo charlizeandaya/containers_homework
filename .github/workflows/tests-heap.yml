@@ -1,4 +1,4 @@
-name: heap
+name: tests-heap
 on:
   push:
     branches: ['*']
@@ -26,4 +26,4 @@ jobs:
           flake8 containers/Heap.py --ignore=E501
       - name: Run tests
         run: |
-          python -m pytest tests/Heap.py
+          python -m pytest tests/test_Heap.py
