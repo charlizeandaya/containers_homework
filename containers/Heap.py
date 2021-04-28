@@ -195,7 +195,7 @@ class Heap(BinaryTree):
                 bottom = "{0:b}".format(nodes)[1:]
                 self.root.value = Heap._remove_bottom_right(
                     self.root, bottom)
-                self.root = Heap._trickle(self.root)
+                Heap._trickle(self.root)
 
     @staticmethod
     def _remove_bottom_right(node, remlist):
