@@ -229,25 +229,25 @@ class Heap(BinaryTree):
                 temp = node.value
                 node.value = node.left.value
                 node.left.value = temp
-                node.left = Heap._trickle(node.left)
+                Heap._trickle(node.left)
             elif node.right:
                 temp = node.value
                 node.value = node.right.value
                 node.right.value = temp
-                node.right = Heap._trickle(node.right)
+                Heap._trickle(node.right)
             elif node.left and node.right:
                 if node.left.value >= node.right.value:
                     temp = node.value
                     node.value = node.right.value
                     node.right.value = temp
-                    node.right = Heap._trickle(node.right)
+                    Heap._trickle(node.right)
                 elif node.left.value <= node.right.value:
                     temp = node.value
                     node.value = node.left.value
                     node.left.value = temp
-                    node.left = Heap._trickle(node.left)
-            else:
-                return node
-        else:
-            return node
-        return node
+                    Heap._trickle(node.left)
+        #     else:
+        #         return node
+        # else:
+        #     return node
+        # return node
