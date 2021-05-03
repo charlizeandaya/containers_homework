@@ -47,21 +47,12 @@ def range(a, b=None, c=None):
     if c:
         increment = c
 
-    if end_val > start_val:
+    if end_val > start_val and increment > 0:
         while start_val < end_val:
             yield start_val
             start_val += increment
-    if end_val < start_val:
+
+    elif end_val < start_val and increment < 0:
         while start_val > end_val:
             yield start_val
             start_val += increment
-
-
-if __name__ == "__main__":
-    # print(list(range(0,-10,-1)))
-    # print(list(range(5)))
-    # print(list(range(1, 5)))
-    # print(list(range(1, 5, 2)))
-    # print(list(range(0,-10,-3)))
-    # print(list(range(0,10,-1)))
-    print(list(range(0, 10, 3)))

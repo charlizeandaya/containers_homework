@@ -66,21 +66,36 @@ class Fib:
     def __iter__(self):
         return FibIter(self.num)
 
+    def __repr__(self):
+        if self.num is None:
+            return f"{self.__class__.__name__}()"
+        else:
+            return f"{self.__class__.__name__}({self.num})"
+
 
 class FibIter:
     '''
     This is the iterator helper class for the Fib class.
     '''
+
     def __init__(self, n):
         self.num = n
+        self.f0 = 1
+        self.f1 = 1
         self.i = 0
 
     def __next__(self):
-        if self.num is not None and self.num <= self.i:
+        if self.num is not None and self.i >= self.num:
             raise StopIteration
         else:
+            if self.i == 1 or self.i == 0:
+                self.f2 = 1
+            else:
+                self.f2 = self.f1 + self.f0
+                self.f0 = self.f1
+                self.f1 = self.f2
             self.i += 1
-            return list(fib_yield(self.i))
+            return self.f2
 
 
 def fib_yield(n=None):
@@ -90,10 +105,17 @@ def fib_yield(n=None):
     numbers.
     If n is None, then the generator is infinite.
     '''
+
     f0 = 1
     f1 = 1
-    for i in range(n):
-        f2 = f1 + f0
-        yield f0
-        f0 = f1
-        f1 = f2
+    if n is None:
+        while True:
+            f2 = f1 + f0
+            yield f0
+            f0 = f1
+    else:
+        for i in range(n):
+            f2 = f1 + f0
+            yield f0
+            f0 = f1
+            f1 = f2
