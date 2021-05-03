@@ -10,9 +10,9 @@ README = (HERE / "README.md").read_text()
 # This call to setup() does all the work
 setup(
     name="cmc_csci046_charlizeandaya",
-    version="1.0.0",
-    description="Implementation of Binary Tree, Binary Search Tree, AVL Tree, \
-        Heap, Unicode, Range, and Fibonacci",
+    version="1.0.1",
+    description="Implementations of a binary tree, binary search tree, avl tree,\
+         heap, unicode, range, and fibonacci",
     long_description=README,
     long_description_content_type="text/markdown",
     url="https://github.com/charlizeandaya/containers_homework",
